@@ -1,0 +1,116 @@
+const alphabets = [...'abcdefghijklmnopqrstuvwxyz'];
+
+// console.log(alphabets);
+
+function checkCharacters(word) {
+  const letters = word.toLowerCase().split('');
+  let char = 0;
+  for (let letter of letters) {
+    if (alphabets.includes(letter)) {
+      char++;
+    }
+  }
+  return char;
+}
+
+function checkWord(word) {
+  const words = word.split(' ');
+  let numWords = 0;
+  for (let w of words) {
+    numWords++;
+  }
+  return numWords;
+}
+
+const digits = {
+  'Ten-Thousand': 10000,
+  'Nine-Thousand': 9000,
+  'Eight-Thousand': 8000,
+  'Seven-Thousand': 7000,
+  'Six-Thousand': 6000,
+  'Five-Thousand': 5000,
+  'Four-Thousand': 4000,
+  'Three-Thousand': 3000,
+  'Two-Thousand': 2000,
+  'One-Thousand': 1000,
+  'Nine-Hundered': 900,
+  'Eight-Hundered': 800,
+  'Seven-Hundered': 700,
+  'Six-Hundered': 600,
+  'Five-Hundered': 500,
+  'Four-Hundered': 400,
+  'Three-Hundered': 300,
+  'Two-Hundered': 200,
+  'One-Hundered': 100,
+  ninety: 90,
+  eighty: 80,
+  seventy: 70,
+  sixty: 60,
+  fifty: 50,
+  fourty: 40,
+  thirty: 30,
+  twenty: 20,
+  nineteen: 19,
+  eighteen: 18,
+  seventeen: 17,
+  sixteen: 16,
+  fifteen: 15,
+  fourten: 14,
+  thirteen: 13,
+  twelve: 12,
+  eleven: 11,
+  ten: 10,
+  nine: 9,
+  eight: 8,
+  seven: 7,
+  six: 6,
+  five: 5,
+  four: 4,
+  three: 3,
+  two: 2,
+  one: 1,
+};
+
+function convertToWord(numCount) {
+  let test = '';
+  for (let key in digits) {
+    while (numCount >= digits[key]) {
+      test += `${key} `;
+      numCount -= digits[key];
+    }
+  }
+
+  test = test.split(' ');
+  if (test.length >= 3) {
+    test = test[0] + ' and ' + test.slice(1);
+    test = test.replaceAll(',', ' ');
+  } else {
+    test = test.join(' ');
+  }
+
+  console.log(test);
+
+  return test;
+}
+
+function getDetails(word) {
+  let wordCount = checkWord(word);
+  let charCount = checkCharacters(word);
+
+  let wordCountinWords = convertToWord(wordCount);
+  let charCountinWords = convertToWord(charCount);
+  return [
+    {
+      word: {
+        wordCount,
+        wordCountinWords,
+      },
+      char: {
+        charCount,
+        charCountinWords,
+      },
+    },
+  ];
+}
+
+console.log(getDetails(`It pays to learn Javascript))
